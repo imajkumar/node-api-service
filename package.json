@@ -1,0 +1,40 @@
+{
+  "name": "nodeapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts",
+    "lint": "eslint .",
+    "lint-staged": "lint-staged",
+    "format-lint": "prettier --config .prettierrc -l --ignore-unknown .",
+    "format-fix": "prettier --config .prettierrc --write --ignore-unknown ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run lint"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.21",
+    "@types/helmet": "^4.0.0",
+    "@types/node": "^20.12.5",
+    "eslint": "^9.0.0",
+    "husky": "^9.0.11",
+    "prettier": "^3.2.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.4"
+  }
+}

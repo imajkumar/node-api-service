@@ -12,6 +12,7 @@ import routes from './routes';
  * App Variables
  */
 if (!process.env.PORT) {
+            
           process.exit(1);
 }
 

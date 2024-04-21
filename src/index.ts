@@ -1,7 +1,7 @@
 /**
  * Required External Modules
  */
-import * as dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -32,5 +32,5 @@ app.use('/', routes);
  * Server Activation
  */
 app.listen(port, () => {
-      console.log(`Listening on port ${port}`);
+         console.log(`Listening on port ${port}`);
 });

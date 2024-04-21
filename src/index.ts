@@ -12,8 +12,7 @@ import routes from './routes';
  * App Variables
  */
 if (!process.env.PORT) {
-            
-          process.exit(1);
+  process.exit(1);
 }
 
 const port = process.env.PORT || 4000;
@@ -33,5 +32,5 @@ app.use('/', routes);
  * Server Activation
  */
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+    console.log(`Listening on port ${port}`);
 });

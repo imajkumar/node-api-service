@@ -4,14 +4,27 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts",
+    "build": "rimraf dist && tsc",
+    "start": "NODE_PATH=./dist node ./dist/index.js",
     "lint": "eslint .",
     "lint-staged": "lint-staged",
     "format-lint": "prettier --config .prettierrc -l --ignore-unknown .",
-    "format-fix": "prettier --config .prettierrc --write --ignore-unknown ."
+    "format-fix": "prettier --config .prettierrc --write --ignore-unknown .",
+    "docker:dev": "docker-compose --file docker-compose.yml --file docker-compose.dev.yml --compatibility up --build",
+    "docker:stage": "docker-compose --file docker-compose.yml --file docker-compose.stage.yml --compatibility up --build",
+    "docker:prod": "docker-compose --file docker-compose.yml --file docker-compose.prod.yml --compatibility up --build",
+    "migration:run": "NODE_PATH=./src ts-node ./node_modules/typeorm/cli.js migration:run --config ./src/orm/config/ormconfig.ts",
+    "migration:run:dev": "PG_HOST=localhost NODE_PATH=./src ts-node ./node_modules/typeorm/cli.js migration:run --config ./src/orm/config/ormconfig.ts",
+    "migration:revert": "PG_HOST=localhost NODE_PATH=./src ts-node ./node_modules/typeorm/cli.js migration:revert --config ./src/orm/config/ormconfig.ts",
+    "migration:generate": "PG_HOST=localhost NODE_PATH=./src ts-node ./node_modules/.bin/typeorm migration:generate --pretty --config ./src/orm/config/ormconfig.ts -n ",
+    "migration:create": "PG_HOST=localhost NODE_PATH=./src ts-node ./node_modules/.bin/typeorm migration:create --config ./src/orm/config/ormconfig.ts -n ",
+    "seed:run": "NODE_PATH=./src ts-node ./node_modules/.bin/typeorm migration:run --config ./src/orm/config/ormconfig-seed.ts",
+    "seed:run:dev": "PG_HOST=localhost NODE_PATH=./src ts-node ./node_modules/.bin/typeorm migration:run --config ./src/orm/config/ormconfig-seed.ts",
+    "seed:create": "PG_HOST=localhost NODE_PATH=./src ts-node ./node_modules/.bin/typeorm migration:create --config ./src/orm/config/ormconfig-seed.ts -n "
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run format-fix",
+      "pre-commit":"lint-staged && npm run format-fix",
       "pre-push": "npm run lint"
     }
   },
